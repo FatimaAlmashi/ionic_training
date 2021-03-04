@@ -1,20 +1,27 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
+    <ion-title slot="end">
+      تفسير القرآن الكريم
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content [fullscreen]="true" color="warning" slot="end">
+  <div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
+    <ion-card  style="height: 90%; width: 90%;" >
+    <ion-card-header>
+      <form [formGroup]="tafseerForm" (ngSubmit)="getTafseer()">
+        <div class="form-group" style="width: 100%; display: flex; align-items: center; justify-content: center;">
+            <ion-button color="warning" type="submit" [disabled]="!tafseerForm.valid">فسّر</ion-button>
+            <ion-input formControlName="ayahNumber" class="input" type="text" placeholder="رقم الآية"></ion-input>
+            <ion-input formControlName="surahNumber" class="input" type="text" placeholder="رقم السورة"></ion-input>
+        </div>
+      </form> 
+    </ion-card-header>
+    <ion-card-content style="background-color: rgb(212, 212, 212); height:100%">
+      <p style="text-align: end; color: rgb(53, 53, 53);">محتوى التفسير</p>
+    </ion-card-content>
+      
+    </ion-card>
   </div>
 </ion-content>
