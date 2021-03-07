@@ -24,6 +24,8 @@ export class HomePage {
 
   ayahText: any;
   ayahTranslation: any;
+  // surahIsNum = false;
+  // ayahIsNum = false;
 
 
   constructor(private formBuilder:FormBuilder, _service: AppService, private http: HttpClient) {
@@ -32,8 +34,15 @@ export class HomePage {
       ayahNumber: ['', Validators.compose([Validators.required, Validators.maxLength(3)])],
     });
 
+
     this.surahNumber= this.tafseerForm.controls.surahNumber
+    // if(typeof(this.surahNumber)=='number'){
+    //   this.surahIsNum = true
+    // }
     this.ayahNumber= this.tafseerForm.controls.ayahNumber
+    // if(typeof(this.ayahNumber)=='number'){
+    //   this.ayahIsNum = true
+    // }
     this.service = _service
 
   }
@@ -44,6 +53,13 @@ export class HomePage {
      this.ayahText = "۝ "+this.tafseerModel.text + " ۝"
      this.ayahTranslation = this.tafseerModel.translation
   }
+
+
+  onSubmit() {
+    if (this.tafseerForm.valid) {
+      this.showAyay();
+    }}
+
 
   getTafseer(){
     const res = this.service.ayah_tafseer(this.surahNumber.value,this.ayahNumber.value)
