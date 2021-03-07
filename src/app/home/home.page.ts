@@ -41,7 +41,7 @@ export class HomePage {
 
   async showAyay(){
      await this.getTafseer()
-     this.ayahText = this.tafseerModel.text
+     this.ayahText = "۝ "+this.tafseerModel.text + " ۝"
      this.ayahTranslation = this.tafseerModel.translation
   }
 
@@ -57,8 +57,6 @@ export class HomePage {
     this.tafseerModel.tafsir = localStorage.getItem('tafsir')
     this.tafseerModel.surah = localStorage.getItem('surah')
   }
-
-
 
 
 

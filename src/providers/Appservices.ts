@@ -12,12 +12,6 @@ export class AppService {
 
     }
 
-
-
-
-
-
-
     ayah_tafseer(surahNumber: string, ayahNumber: string){
 
 

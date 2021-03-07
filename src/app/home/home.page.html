@@ -1,34 +1,32 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title slot="end">
-      ترجمة القرآن الكريم
+    <ion-title>
+      <p style="color: rgb(28, 100, 102);">ترجمة القرآن الكريم</p>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" color="warning" slot="end">
-  <div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
+<ion-content [fullscreen]="true" slot="end">
+  <div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; background-image: url('../../assets/images/app-bg.jpg'); background-size: cover;">
     <ion-card  style="height: 95%; width: 95%;" >
     <ion-card-header>
       <form [formGroup]="tafseerForm" (ngSubmit)="showAyay()">
         <div class="form-group" style="width: 100%; display: flex; align-items: center; justify-content: center;">
-            <ion-button color="warning" type="submit" [disabled]="!tafseerForm.valid">ترجمة</ion-button>
+            <ion-button color="medium" fill="outline" type="submit" [disabled]="!tafseerForm.valid">ترجمة</ion-button>
             <ion-input formControlName="ayahNumber" class="input" type="text" placeholder="رقم الآية"></ion-input>
             <ion-input formControlName="surahNumber" class="input" type="text" placeholder="رقم السورة"></ion-input>
         </div>
       </form> 
     </ion-card-header>
-    <ion-card-content style="background-color: rgb(236, 236, 236); height:100%;">
-      <div style="padding-top: 5%; padding-left: 5%; padding-right: 5%;">
-        <ion-infinite-scroll>
-          <h2 *ngIf="ayahText != undefined" style="text-align: end; color: #cca00e;">الآية</h2>
+    <ion-card-content style="background-color: #dff5ef; height:100%;">
+                
+      <div style="padding-top: 5%; padding-left: 5%; padding-right: 5%; scroll-behavior: smooth;">
+          <h2 *ngIf="ayahText != undefined" style="text-align: end; color: rgb(28, 100, 102);">الآية</h2>
           <p style="text-align: end; color: rgb(53, 53, 53); margin-top: 5%;">{{ayahText}}</p>
-          <h2 *ngIf="ayahTranslation != undefined" style="text-align: end; color: #cca00e; margin-top: 5%; ">الترجمة الإنجليزية</h2>
+          <h2 *ngIf="ayahTranslation != undefined" style="text-align: end; color: rgb(28, 100, 102); margin-top: 5%; ">الترجمة الإنجليزية</h2>
           <p style="text-align: end; color: rgb(53, 53, 53);margin-top: 5%;">{{ayahTranslation}}</p>
-        </ion-infinite-scroll>
-        
       </div>
-      
+
     </ion-card-content>
       
     </ion-card>
