@@ -19,7 +19,6 @@ export class HomePage {
   tafseerForm: FormGroup;
   surahNumber: AbstractControl;
   ayahNumber: AbstractControl;
-
   service: any;
   public tafseerModel: tafseerModel;
 
@@ -36,12 +35,14 @@ export class HomePage {
 
   }
 
-  async getTafseer(){
-    const res = await this.service.ayah_tafseer(this.surahNumber.value,this.ayahNumber.value)
-    console.log('------------- back to getTafseer -------------')
+  getTafseer(){
+    const res = this.service.ayah_tafseer(this.surahNumber.value,this.ayahNumber.value)
+    console.log('------------- back to getTafseer -------------')  
+    console.log('=========>>>>> '+ res.code )
 
-    console.log('=========>>>>> '+ res["message"]) 
-    console.log('=========>>>>> '+ res["code"]) 
+     
+    // console.log('=========>>>>> '+ res["code"]) 
+
 
     // localStorage.setItem('number', res.data.number)
     // localStorage.setItem('meta', res.data.meta)

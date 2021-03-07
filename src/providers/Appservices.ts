@@ -25,16 +25,21 @@ export class AppService {
         
         const headers = new HttpHeaders();
         headers.append('Accept', 'application/JSON');
-        return this.http.get(url , {
+        const response = this.http.get(url , {
             headers,
             responseType: 'text'
         }).subscribe(res => {
-            JSON.parse(res);
-            console.log('........... '+res);    
-            console.log('........... '+res["code"]);    
+            let res2 = JSON.parse(res);
+            console.log('> > > > > > '+res2.data.text.arab);
+            console.log('...........typeof res2 = '+typeof(res2));
             
-            
+            return JSON.parse(res);
+            // console.log('...........typeof res '+typeof(res));    
+            // console.log('...........typeof res2 '+typeof(res2));
+            // console.log('> > > > > > '+res2.data.text);
+            // return res2
         });
+         
 
         // const testUrl = 'https://api.quran.sutanlab.id/surah/2/255';
         // const url = 'https://api.quran.sutanlab.id/surah' + '/' + surahNumber + '/' + ayahNumber    
