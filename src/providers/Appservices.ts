@@ -30,22 +30,16 @@ export class AppService {
             responseType: 'text'
         }).subscribe(res => {
             let res2 = JSON.parse(res);
-            console.log('> > > > > > '+res2.data.text.arab);
-            console.log('...........typeof res2 = '+typeof(res2));
-
             localStorage.setItem('number', res2.data.number)
             localStorage.setItem('meta', res2.data.meta)
             localStorage.setItem('text', res2.data.text.arab)
-            localStorage.setItem('translation', res2.data.translation)
+            localStorage.setItem('translation', res2.data.translation.en)
             localStorage.setItem('audio', res2.data.audio)
             localStorage.setItem('tafsir', res2.data.tafsir)
             localStorage.setItem('surah', res2.data.surah)
-            
+        
             return JSON.parse(res);
-            // console.log('...........typeof res '+typeof(res));    
-            // console.log('...........typeof res2 '+typeof(res2));
-            // console.log('> > > > > > '+res2.data.text);
-            // return res2
+       
         });
          
 

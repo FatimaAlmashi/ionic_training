@@ -23,6 +23,7 @@ export class HomePage {
   public tafseerModel: tafseerModel;
 
   ayahText: any;
+  ayahTranslation: any;
 
 
   constructor(private formBuilder:FormBuilder, _service: AppService, private http: HttpClient) {
@@ -37,6 +38,13 @@ export class HomePage {
 
   }
 
+
+  async showAyay(){
+     await this.getTafseer()
+     this.ayahText = this.tafseerModel.text
+     this.ayahTranslation = this.tafseerModel.translation
+  }
+
   getTafseer(){
     const res = this.service.ayah_tafseer(this.surahNumber.value,this.ayahNumber.value)
 
@@ -48,8 +56,6 @@ export class HomePage {
     this.tafseerModel.audio = localStorage.getItem('audio')
     this.tafseerModel.tafsir = localStorage.getItem('tafsir')
     this.tafseerModel.surah = localStorage.getItem('surah')
-  
-    this.ayahText = this.tafseerModel.text
   }
 
 
