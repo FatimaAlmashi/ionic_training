@@ -22,6 +22,8 @@ export class HomePage {
   service: any;
   public tafseerModel: tafseerModel;
 
+  ayahText: any;
+
 
   constructor(private formBuilder:FormBuilder, _service: AppService, private http: HttpClient) {
     this.tafseerForm = formBuilder.group({
@@ -37,35 +39,19 @@ export class HomePage {
 
   getTafseer(){
     const res = this.service.ayah_tafseer(this.surahNumber.value,this.ayahNumber.value)
-    console.log('------------- back to getTafseer -------------')  
-    console.log('=========>>>>> '+ res.code )
 
-     
-    // console.log('=========>>>>> '+ res["code"]) 
-
-
-    // localStorage.setItem('number', res.data.number)
-    // localStorage.setItem('meta', res.data.meta)
-    // localStorage.setItem('text', res.data.text)
-    // localStorage.setItem('translation', res.data.translation)
-    // localStorage.setItem('audio', res.data.audio)
-    // localStorage.setItem('tafsir', res.data.tafsir)
-    // localStorage.setItem('surah', res.data.surah)
-
-    // this.tafseerModel = new tafseerModel();
-    // this.tafseerModel.number = res.data.number
-    // this.tafseerModel.meta = res.data.meta
-    // this.tafseerModel.text = res.data.text
-    // this.tafseerModel.translation = res.data.translation
-    // this.tafseerModel.audio = res.data.audio
-    // this.tafseerModel.tafsir = res.data.tafsir
-    // this.tafseerModel.surah = res.data.surah
+    this.tafseerModel = new tafseerModel();
+    this.tafseerModel.number = localStorage.getItem('number')
+    this.tafseerModel.meta = localStorage.getItem('meta')
+    this.tafseerModel.text = localStorage.getItem('text')
+    this.tafseerModel.translation = localStorage.getItem('translation')
+    this.tafseerModel.audio = localStorage.getItem('audio')
+    this.tafseerModel.tafsir = localStorage.getItem('tafsir')
+    this.tafseerModel.surah = localStorage.getItem('surah')
   
-    // console.log('this.tafseerModel.text = '+ this.tafseerModel.text)
-
-
-
+    this.ayahText = this.tafseerModel.text
   }
+
 
 
 
