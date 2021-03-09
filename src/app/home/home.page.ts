@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
 import { AppService } from '../../providers/Appservices';
-import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
-import config from '../../providers/config';
-import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { tafseerModel } from '../../Models/tafseerModel';
-
+import { error } from 'protractor';
+// import { error } from 'protractor';
+// import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 
 
@@ -14,6 +14,8 @@ import { tafseerModel } from '../../Models/tafseerModel';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
+
 export class HomePage {
 
   tafseerForm: FormGroup;
@@ -21,19 +23,16 @@ export class HomePage {
   ayahNumber: AbstractControl;
   service: any;
   public tafseerModel: tafseerModel;
-
   ayahText: any;
   ayahTranslation: any;
   // surahIsNum = false;
   // ayahIsNum = false;
-
 
   constructor(private formBuilder:FormBuilder, _service: AppService, private http: HttpClient) {
     this.tafseerForm = formBuilder.group({
       surahNumber: ['', Validators.compose([Validators.required, Validators.maxLength(3)])],
       ayahNumber: ['', Validators.compose([Validators.required, Validators.maxLength(3)])],
     });
-
 
     this.surahNumber= this.tafseerForm.controls.surahNumber
     // if(typeof(this.surahNumber)=='number'){
@@ -48,31 +47,80 @@ export class HomePage {
   }
 
 
+
   async showAyay(){
      await this.getTafseer()
-     this.ayahText = "۝ "+this.tafseerModel.text + " ۝"
-     this.ayahTranslation = this.tafseerModel.translation
+    //  this.ayahText = "۝ "+this.tafseerModel.text + " ۝"
+    //  this.ayahTranslation = this.tafseerModel.translation
   }
 
+
+   getTafseer(){
+    this.service.ayah_tafseer(this.surahNumber.value, this.ayahNumber.value).subscribe(
+      response2 => {
+        console.log('response2' , response2);
+        this.tafseerModel = new tafseerModel();
+        this.tafseerModel.number = localStorage.getItem('number');
+        this.tafseerModel.meta = localStorage.getItem('meta');
+        this.tafseerModel.text = localStorage.getItem('text');
+        this.tafseerModel.translation = localStorage.getItem('translation');
+        this.tafseerModel.audio = localStorage.getItem('audio');
+        this.tafseerModel.tafsir = localStorage.getItem('tafsir');
+        this.tafseerModel.surah = localStorage.getItem('surah');
+        console.log('aya text2', localStorage.getItem('text'));
+        this.ayahText = this.tafseerModel.text;
+        this.ayahTranslation = this.tafseerModel.translation;
+      },
+      error => console.log(error.message)
+    );
+   }
+
+
+   
+
+
+
+
+   
+
+
+
+  // getAudio(){
+  //   this.nativeAudio.preloadSimple('uniqueId1', 'path/to/file.mp3').then(onSuccess, onError);
+  //   this.nativeAudio.preloadComplex('uniqueId2', 'path/to/file2.mp3', 1, 1, 0).then(onSuccess, onError);
+
+  //   this.nativeAudio.play('uniqueId1').then(onSuccess, onError);
+
+  //   // can optionally pass a callback to be called when the file is done playing
+  //   this.nativeAudio.play('uniqueId1', () => console.log('uniqueId1 is done playing'));
+
+  //   this.nativeAudio.loop('uniqueId2').then(onSuccess, onError);
+
+  //   this.nativeAudio.setVolumeForComplexAsset('uniqueId2', 0.6).then(onSuccess,onError);
+
+  //   this.nativeAudio.stop('uniqueId1').then(onSuccess,onError);
+
+  //   this.nativeAudio.unload('uniqueId1').then(onSuccess,onError);
+  // }
 
   onSubmit() {
     if (this.tafseerForm.valid) {
       this.showAyay();
-    }}
-
-
-  getTafseer(){
-    const res = this.service.ayah_tafseer(this.surahNumber.value,this.ayahNumber.value)
-
-    this.tafseerModel = new tafseerModel();
-    this.tafseerModel.number = localStorage.getItem('number')
-    this.tafseerModel.meta = localStorage.getItem('meta')
-    this.tafseerModel.text = localStorage.getItem('text')
-    this.tafseerModel.translation = localStorage.getItem('translation')
-    this.tafseerModel.audio = localStorage.getItem('audio')
-    this.tafseerModel.tafsir = localStorage.getItem('tafsir')
-    this.tafseerModel.surah = localStorage.getItem('surah')
+    }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

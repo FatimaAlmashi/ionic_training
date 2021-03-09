@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppService } from '../providers/Appservices';
 import { HttpClientModule } from '@angular/common/http';
-import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,9 +21,7 @@ import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
   providers: [
     AppService,
     HttpClient, 
-    HttpParams, 
-    // HttpHeaders,
-    // HTTP,
+    HttpParams,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
