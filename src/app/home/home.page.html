@@ -12,6 +12,7 @@
       <ion-card-header>
         <form [formGroup]="tafseerForm" (ngSubmit)="onSubmit()">
           <div class="form-group" style="width: 100%; display: flex; align-items: center; justify-content: center;">
+              <ion-button color="medium" fill="outline" (click)="goToTrain()">train</ion-button>
               <ion-button color="medium" fill="outline" type="submit" [disabled]="!tafseerForm.valid">ترجمة</ion-button>
               <ion-input formControlName="ayahNumber" class="input" type="text" placeholder="رقم الآية"></ion-input>
               <ion-input formControlName="surahNumber" class="input" type="text" placeholder="رقم السورة"></ion-input>

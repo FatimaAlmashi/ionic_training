@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>train Page .....</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-item>
+  <ion-label>Button value is {{tryEventText}}</ion-label>
+  <ion-button (click)="tryEvent($event)" value="fatimaaaaa">tryEvent</ion-button>
+</ion-item>
+
+<ion-item>
+  <p [style.color]="jsonStyle ? 'red':'green' ">{{jsonTest | json}}</p>
+</ion-item>
+<ion-item>
+  {{dateTest | date:'shortTime'}}
+</ion-item>
+<ion-item>
+  {{dateTest | date:'shortDate'}}
+</ion-item>
+<ion-item>
+  <ion-input [(ngModel)]="inputName" size="small" placeholder='Enter your name here'></ion-input>
+</ion-item>
+  <form>
+      <ion-item class="box">
+        <ion-label color="primary" position="floating" placeholder="Username">Username</ion-label>
+        <ion-input size="small" type="text" placeholder={{inputName}}></ion-input>
+      </ion-item>
+      <ion-item class="box">
+        <ion-label color="primary" position="floating" placeholder="Password">Password</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+
+      <div class="form-group">
+        <ion-select class="selector"  placeholder="نوع البلاغ" >
+            <ion-select-option value= "test1">test1</ion-select-option>
+            <ion-select-option value= "test2">test2</ion-select-option>
+            <ion-select-option value= "test3">test3</ion-select-option>
+        </ion-select>
+    </div>
+  </form>
+  <ion-button [ngStyle]="btnStyle" (click)="getRequest()" expand="block" color="medium">
+    Get Request
+  </ion-button>
+  {{requestObject}}
+</ion-content>

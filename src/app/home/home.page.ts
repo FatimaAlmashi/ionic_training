@@ -4,6 +4,8 @@ import { AppService } from '../../providers/Appservices';
 import { HttpClient } from '@angular/common/http';
 import { tafseerModel } from '../../Models/tafseerModel';
 import { error } from 'protractor';
+import {Router} from '@angular/router';
+
 // import { error } from 'protractor';
 // import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
@@ -28,7 +30,7 @@ export class HomePage {
   // surahIsNum = false;
   // ayahIsNum = false;
 
-  constructor(private formBuilder:FormBuilder, _service: AppService, private http: HttpClient) {
+  constructor(private formBuilder:FormBuilder, _service: AppService, private http: HttpClient, public router: Router) {
     this.tafseerForm = formBuilder.group({
       surahNumber: ['', Validators.compose([Validators.required, Validators.maxLength(3)])],
       ayahNumber: ['', Validators.compose([Validators.required, Validators.maxLength(3)])],
@@ -73,6 +75,12 @@ export class HomePage {
       },
       error => console.log(error.message)
     );
+   }
+
+
+   goToTrain(){
+
+    this.router.navigate(['train']);
    }
 
 
