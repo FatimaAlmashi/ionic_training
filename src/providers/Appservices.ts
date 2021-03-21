@@ -3,25 +3,55 @@ import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import {map, catchError} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import { error } from 'protractor';
-// import 'rxjs/add/operator/catch';
-// import { HTTP } from '@ionic-native/http/ngx';
+import { HTTP } from '@ionic-native/http/ngx';
+import config from '../providers/config';
+import { insertNewCitizenIdeaModel } from '../Models/insertNewCitizenIdeaModel'
 
 @Injectable()
 
-// username: falmashi
-// password: 123456789
-// {'Authorization': 'Basic ZmFsbWFzaGk6MTIzNDU2Nzg5'}
-
-
 export class AppService {
 
-    constructor(
-        private http: HttpClient,
-        //  private http2: HTTP
-         ){
+    constructor( private http: HttpClient, 
+        private http2: HTTP
+        ){
 
     }
 
+    getCitizenIdeaObject(inNeCiIdModel : insertNewCitizenIdeaModel){
+        return {
+            "ideasInfo":{
+              "DESCRIPTION": inNeCiIdModel.DESCRIPTION,
+              "EMAIL": inNeCiIdModel.EMAIL,
+              "NAME": inNeCiIdModel.NAME,
+              "PHONE": inNeCiIdModel.PHONE,
+              "RECIPIENT":{
+                "ID": inNeCiIdModel.RECIPIENT
+              },
+               "TITLE":inNeCiIdModel.TITLE,
+            }
+        }
+    }
+    
+
+    insertNewCitizenIdea(inNeCiIdModel: insertNewCitizenIdeaModel): any {
+    
+        const TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1laWQiOiIxMDc1NzczMjMyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbW9iaWxlcGhvbmUiOiIwNTA3MTcxMzE4IiwibW9iaWxlcGhvbmUyIjoiMDUwNzE3MTMxOCIsImVtYWlsIjoiZi5hbG1hc2hpQHdpbmRvd3NsaXZlLmNvbSIsInJvbGUiOiJDaXRpemVuIiwiZ3JvdXBfbmFtZSI6IkNpdGl6ZW4iLCJpc3MiOiJodHRwczovL3dzcnYuaG9seW1ha2thaC5nb3Yuc2EiLCJhdWQiOiJodHRwczovL3dzcnYuaG9seW1ha2thaC5nb3Yuc2EiLCJleHAiOjE2MTYzMTU4NzgsIm5iZiI6MTYxNjMwNTA3OH0.szalV1wE38aWPBtIHPcsxWSQr5TzVJsYPFYK0jd0mo8"
+        
+        return this.http2.post(
+            config.insertNewCitizenIdeaUrl,
+            this.getCitizenIdeaObject(inNeCiIdModel),
+            { 'Content-Type': 'application/json', Authorization: TOKEN })
+            .then(data => {
+                console.log(data.status);
+                console.log(data.data);
+                return JSON.parse(data.data);
+            })
+            .catch(error => {
+                console.log(error);
+                console.log(error.error);
+                return error.error
+            });
+    }
 
 
     // private handleError(error: HttpErrorResponse) {

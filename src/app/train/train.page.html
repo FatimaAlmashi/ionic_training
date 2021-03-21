@@ -1,15 +1,58 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <ion-title>train Page .....</ion-title>
+    <ion-title>إضافة فكرة جديدة من قبل المواطنين</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+ 
+  <form [formGroup]="insertNewCitizenIdeaForm" (ngSubmit)="onSubmit()" style="margin-top: 10%;">
+
+    <ion-item class="box">
+      <ion-label color="primary" position="floating" placeholder="name">الاسم</ion-label>
+      <ion-input formControlName="name" size="small" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item class="box">
+      <ion-label color="primary" position="floating" placeholder="email">البريد الالكتروني</ion-label>
+      <ion-input formControlName="email" size="small" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item class="box">
+      <ion-label color="primary" position="floating" placeholder="phone">رقم الجوال</ion-label>
+      <ion-input formControlName="phone" size="small" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item class="box">
+      <ion-label color="primary" position="floating" placeholder="title">عنوان الفكرة</ion-label>
+      <ion-input formControlName="title" size="small" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item class="box">
+      <ion-label color="primary" position="floating" placeholder="description">وصف الفكرة</ion-label>
+      <ion-input formControlName="description" size="small" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item class="box">
+      <ion-label color="primary" position="floating" placeholder="recipient">رمز الجهة
+      </ion-label>
+      <ion-input formControlName="recipient" size="small" type="text"></ion-input>
+    </ion-item>
+    
+    <ion-item class="box">
+      <ion-button type="submit" [disabled]="!insertNewCitizenIdeaForm.valid">إرسال</ion-button>
+    </ion-item>
+  </form>
+
+
+
+
+<!-- 
+
 <ion-item>
   <ion-label>Button value is {{tryEventText}}</ion-label>
   <ion-button (click)="tryEvent($event)" value="fatimaaaaa">tryEvent</ion-button>
 </ion-item>
-
 <ion-item>
   <p [style.color]="jsonStyle ? 'red':'green' ">{{jsonTest | json}}</p>
 </ion-item>
@@ -43,5 +86,5 @@
   <ion-button [ngStyle]="btnStyle" (click)="getRequest()" expand="block" color="medium">
     Get Request
   </ion-button>
-  {{requestObject}}
+  {{requestObject}} -->
 </ion-content>
